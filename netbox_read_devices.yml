@@ -1,0 +1,22 @@
+# Required inventory: ./inventories/main_inventory.yml
+
+---
+- name: "Check the devices in Netbox"
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+  - name: "Get devices and IP's from Netbox"
+    set_fact:
+      netbox_read_devices_var_devices: "{{ query('netbox.netbox.nb_lookup', 'devices', api_endpoint=netbox_url, token=netbox_token) }}"
+    no_log: True
+
+  - name: "Get device hostnames"
+    loop: "{{ netbox_read_devices_var_devices }}"
+    set_fact:
+      netbox_read_devices_var_devices_hostnames: "{{ netbox_read_devices_var_devices_hostnames|default([]) + [item.value.display + ': ' + item.value.primary_ip4.address] }}"
+    no_log: True
+
+  - debug:
+      var: netbox_read_devices_var_devices_hostnames
