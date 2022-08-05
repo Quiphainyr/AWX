@@ -2,8 +2,8 @@
 
 ---
 - name: "Check the devices in Netbox"
-  hosts: localhost
-  connection: local
+  hosts: 10.0.0.56
+  #connection: local
 
   tasks:
 
