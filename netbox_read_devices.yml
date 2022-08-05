@@ -10,7 +10,7 @@
   - name: "Get devices and IP's from Netbox"
     set_fact:
       netbox_read_devices_var_devices: "{{ query('netbox.netbox.nb_lookup', 'devices', api_endpoint=netbox_url, token=netbox_token) }}"
-    no_log: True
+    #no_log: True
 
   - name: "Get device hostnames"
     loop: "{{ netbox_read_devices_var_devices }}"
