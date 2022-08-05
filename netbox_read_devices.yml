@@ -16,7 +16,7 @@
     loop: "{{ netbox_read_devices_var_devices }}"
     set_fact:
       netbox_read_devices_var_devices_hostnames: "{{ netbox_read_devices_var_devices_hostnames|default([]) + [item.value.display + ': ' + item.value.primary_ip4.address] }}"
-    no_log: True
+    #no_log: True
 
   - debug:
       var: netbox_read_devices_var_devices_hostnames
